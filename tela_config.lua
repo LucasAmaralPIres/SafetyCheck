@@ -1,5 +1,6 @@
 local tela_config = {}
 local pos_conf_x = 777
+local vol = 0.5
 
 function tela_config.load()
 	bac_tel_config = love.graphics.newImage("Imagens/Menu/tela_config.png")
@@ -14,10 +15,12 @@ end
 
 function aumenta()
   pos_conf_x = pos_conf_x + 5
+  volume = music_menu_inicial:setVolume(calcula_volume())
 end
 
 function diminui()
   pos_conf_x = pos_conf_x - 5
+  volume = music_menu_inicial:setVolume(calcula_volume())
 end
 
 function tela_config.andar(key)
@@ -26,6 +29,19 @@ function tela_config.andar(key)
   elseif key == "left" and pos_conf_x > 449 then
     diminui()
   end 
+end
+
+function calcula_volume()
+  vol = (pos_conf_x - 449) / 655
+  return vol
+end
+
+function tela_config.play_musica()
+  love.audio.play(music_menu_inicial)
+	music_menu_inicial:setLooping(true)
+end
+
+function tela_config.stop_musica()
 end
 
 return tela_config

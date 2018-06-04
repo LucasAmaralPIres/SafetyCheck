@@ -17,8 +17,11 @@ end
 function player.getPos()
   return p_inf.p_pos_y
 end
-
-
+--[[
+function player.getInf()
+  return p_inf.p_pos_x
+end
+--]]
 function player.keyreleased(key)
   if key == 'right' then p_inf.p_anim_frame = 1
   elseif key == 'left' then p_inf.p_anim_frame = 7
