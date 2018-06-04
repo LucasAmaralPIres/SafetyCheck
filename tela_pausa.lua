@@ -8,4 +8,10 @@ function tela_pausa.draw()
   	love.graphics.draw(bac_tela_pausa,0,0,0,love.graphics.getWidth()/bac_tela_pausa:getWidth(),love.graphics.getHeight()/bac_tela_pausa:getHeight(),0,0)
  end
  
+ function tela_pausa.play_musica()
+end
+
+function tela_pausa.stop_musica()
+end
+
  return tela_pausa

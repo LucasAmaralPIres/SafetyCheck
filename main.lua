@@ -17,6 +17,7 @@ function love.load()
   player.load()
   a = {x = (love.graphics.getWidth() * 143)/1366, y = (love.graphics.getHeight() * 345)/768, w = (love.graphics.getWidth() * 178)/1366, h = (love.graphics.getHeight() * 370)/768} -- Colocar no lugar certo
   b = {x = (love.graphics.getWidth() * 502)/1366, y = (love.graphics.getHeight() * 433)/768, w = (love.graphics.getWidth() * 250)/1366, h = (love.graphics.getHeight() * 282)/768} -- Colocar no lugar certo
+  menus[menus.st].play_musica()
 end
 
 function love.keyreleased(key)
@@ -38,15 +39,26 @@ function love.update(dt)
 end
 
 function love.mousepressed(x,y,button)
-  if love.mouse.isDown('3') then 
-    menus.st = 3
+  if love.mouse.isDown('m') then 
+    switch_menu(3,menus.st)
   end
   if col.mouse_retangulo(a,x,y) then
     love.event.quit()
   end
   if col.mouse_retangulo(b,x,y) then
-    menus.st = 2
+    switch_menu(2,menus.st)
   end
+end
+--[[
+function love.keypressed(key)
+  if key == "return" then 
+    
+ end
+ --]]
+function switch_menu(novo_menu,velho_menu)
+  menus[velho_menu].stop_musica()
+  menus[novo_menu].play_musica()
+  menus.st = novo_menu
 end
 
 function love.draw()
