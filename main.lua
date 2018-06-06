@@ -18,6 +18,7 @@ function love.load()
   a = {x = (love.graphics.getWidth() * 143)/1366, y = (love.graphics.getHeight() * 345)/768, w = (love.graphics.getWidth() * 178)/1366, h = (love.graphics.getHeight() * 370)/768} -- Colocar no lugar certo
   b = {x = (love.graphics.getWidth() * 502)/1366, y = (love.graphics.getHeight() * 433)/768, w = (love.graphics.getWidth() * 250)/1366, h = (love.graphics.getHeight() * 282)/768} -- Colocar no lugar certo
   menus[menus.st].play_musica()
+  selecionado = 1
 end
 
 function love.keyreleased(key)
@@ -26,7 +27,18 @@ end
 
 function love.update(dt)
   if love.keyboard.isDown("lshift") then player.setCorrer(2) end
-  if love.keyboard.isDown("up") or player.getPos() ~= 500 then player.pular(dt) end
+  if love.keyboard.isDown("up") or player.getPos() ~= 500 then 
+    if menus.st == 1 then
+      player.pular(dt)
+    elseif menus.st == 2 then
+      selecionado = 1
+    end
+  end
+  if love.keyboard.isDown("down") then
+    if menus.st == 2 then
+      selecionado = 2
+    end
+  end
   if love.keyboard.isDown("right") then
     if menus.st == 1 then player.andar(dt,"right")
     elseif menus.st == 2 then menus[menus.st].andar("right")
