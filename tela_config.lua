@@ -1,10 +1,15 @@
 local tela_config = {}
 local pos_conf_x = 837.5
 local vol = 0.5
+local selecionado = 1
 
 function tela_config.load()
 	bac_tel_config = love.graphics.newImage("Imagens/Menu/tela_config.png")
   volume = music_menu_inicial:setVolume(0.5)
+end
+
+function tela_config.setSel(a)
+	selecionado = a
 end
 
 function tela_config.draw()
@@ -21,7 +26,8 @@ function tela_config.draw()
       love.graphics.setColor(154, 205, 50, 255)
       love.graphics.rectangle("fill", (love.graphics.getWidth() * pos_conf_x) / 1366,(love.graphics.getHeight() * 516.5) / 768, (love.graphics.getWidth() * 20) / 1366, (love.graphics.getHeight() * 11) / 768)
   end
-  end
+end
+
 function aumenta()
   pos_conf_x = pos_conf_x + 5
   volume = music_menu_inicial:setVolume(calcula_volume())
@@ -33,11 +39,11 @@ function diminui()
 end
 
 function tela_config.andar(key)
-  if key == "right" and pos_conf_x < 1162 then 
+  if key == "right" and pos_conf_x < 1162 then
     aumenta()
   elseif key == "left" and pos_conf_x > 512 then
     diminui()
-  end 
+  end
 end
 
 function calcula_volume()

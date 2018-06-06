@@ -34,6 +34,9 @@ function player.getvelY()
   return p_inf.velY
 end
 
+function player.getRet()
+  return {x = p_inf.p_pos_x, y = p_inf.p_pos_y, w = p_sprite:getWidth()/7, h = p_sprite:getHeight()/2}
+end
 
 function player.keyreleased(key)
   if key == 'right' and p_inf.velY == 0 then p_inf.p_anim_frame = 1
@@ -63,7 +66,7 @@ function player.andar(dt,key)
   if key == "right" then
     n_pos(200*dt*correr)
     p_inf.p_dir = 1
-  elseif key == "left" then 
+  elseif key == "left" then
     n_pos((-1)*200*dt*correr)
     p_inf.p_dir = -1
   end
@@ -88,12 +91,12 @@ function player.keypressed(key)
     else
       p_inf.p_anim_frame = 4
     end
-
   end
 end
 
 function player.draw()
   love.graphics.draw(p_sprite, tileQuads[p_inf.p_anim_frame], p_inf.p_pos_x, p_inf.p_pos_y,0,p_inf.p_dir*2,2,p_sprite:getWidth()/14,p_sprite:getHeight()/2)
+  love.graphics.rectangle("fill",p_inf.p_pos_x,p_inf.p_pos_y,p_sprite:getWidth()/7,p_sprite:getHeight()/2)
 end
 
 return player
