@@ -24,10 +24,18 @@ function love.keyreleased(key)
   player.keyreleased(key)
 end
 
+function love.keypressed(key)
+  if key == "up" and player.getvelY() == 0 then player.keypressed("up") end
+end
+
 function love.update(dt)
-  if love.keyboard.isDown("lshift") then player.setCorrer(2) end
-  if love.keyboard.isDown("up") or player.getPos() ~= 500 then player.pular(dt) end
-  if love.keyboard.isDown("right") then
+  if love.keyboard.isDown("lshift") and player.getvelY() == 0 then player.setCorrer(2) end
+  if love.keyboard.isDown("up") or player.getvelY() ~= 0 then player.pular(dt) end
+  if player.getvelY() ~= 0 and menus.st == 1 then
+    if player.ger_dir() == 1 then player.andar(dt,"right")
+    else player.andar(dt,"left")
+    end
+  elseif love.keyboard.isDown("right") then
     if menus.st == 1 then player.andar(dt,"right")
     elseif menus.st == 2 then menus[menus.st].andar("right")
     end
