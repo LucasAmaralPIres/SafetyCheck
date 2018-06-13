@@ -1,11 +1,9 @@
 local tela_pausa = {}
+local sel_pause = 1
+local called = 3
 
 function tela_pausa.load()
   bac_tela_pausa = love.graphics.newImage("Imagens/Menu/tela_pausa.png")
-end
-
-function tela_pausa.setSel(a)
-	sel_pause = a
 end
 
 function tela_pausa.draw()
@@ -21,6 +19,33 @@ function tela_pausa.draw()
       love.graphics.setColor(154, 205, 50, 255)
       love.graphics.rectangle("fill", (love.graphics.getWidth() * 632) / 1366,(love.graphics.getHeight() * 411) / 768, (love.graphics.getWidth() * 103) / 1366, (love.graphics.getHeight() * 57) / 768)  
     end
+ end 
+ 
+ function tela_pausa.move(key)
+  if key == "down" then
+      sel_pause = sel_pause + 1
+      if sel_pause > 3 then
+        sel_pause = 1
+      end
+  elseif key == "up" then 
+      sel_pause = sel_pause - 1
+      if sel_pause < 1 then
+        sel_pause = 3
+      end
+  end
+  return sel_pause
+end
+ function tela_pausa.interacao(key)
+  if key == "return" then
+    if sel_pause == 1 then
+      called = 2
+    elseif sel_pause == 2 then
+      called = 4
+    elseif sel_pause == 3 then
+      called = 1
+    end
+  end
+  return called
  end
  
  function tela_pausa.play_musica()
