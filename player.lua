@@ -34,6 +34,9 @@ function player.getvelY()
   return p_inf.velY
 end
 
+function player.getRet()
+  return {x = p_inf.p_pos_x-1.1*p_inf.p_dir*p_sprite:getWidth()/8, y = p_inf.p_pos_y-1.5*p_sprite:getHeight()/2, w = 1.2*p_inf.p_dir*p_sprite:getWidth()/7, h = 1.7*p_sprite:getHeight()}
+end
 
 function player.keyreleased(key)
   if key == 'right' and p_inf.velY == 0 then p_inf.p_anim_frame = 1
@@ -63,7 +66,7 @@ function player.andar(dt,key)
   if key == "right" then
     n_pos(200*dt*correr)
     p_inf.p_dir = 1
-  elseif key == "left" then 
+  elseif key == "left" then
     n_pos((-1)*200*dt*correr)
     p_inf.p_dir = -1
   end
@@ -88,7 +91,6 @@ function player.keypressed(key)
     else
       p_inf.p_anim_frame = 4
     end
-
   end
 end
 
