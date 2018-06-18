@@ -6,7 +6,7 @@
   Técnicos: Pietro Pepe Ribeiro, Ana Carolina Junger
 ]]
 
-local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 3}
+local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 1}
 local col = require "colision"
 local player = require "player"
 
@@ -72,8 +72,7 @@ function love.keypressed(key)
   if menus.st == 3 then
     menus[3].move(key)
     switch_menu(menus[3].interacao(key),menus.st)
-  end
-  if menus.st == 1 then
+  elseif menus.st == 1 then
 	coli = menus[1].getObj()
 	  if key == "return" then
 		  for i = 1,coli.tm,1 do
@@ -92,10 +91,8 @@ function switch_menu(novo_menu,velho_menu)
 end
 
 function love.draw()
-  if menus.st ~= 4 then 
-    menus[menus.st].draw()
-  else 
-    menus[4][1].draw() -- SOMENTE PARA O TESTE DA FASE
+  if menus.st ~= 4 then menus[menus.st].draw()
+  else menus[4][1].draw() -- SOMENTE PARA O TESTE DA FASE
   end
   if menus.st == 1 or menus.st == 4 then player.draw() end
 end
