@@ -6,7 +6,7 @@
   Técnicos: Pietro Pepe Ribeiro, Ana Carolina Junger
 ]]
 
-local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 1}
+local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 3}
 local col = require "colision"
 local player = require "player"
 
