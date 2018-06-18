@@ -21,6 +21,14 @@ function fase1.andar(dt,dir)
   end
 end
 
+function fase1.play_musica()
+  love.audio.play(music_menu_inicial)
+  music_menu_inicial:setLooping(true)
+end
+
+function fase1.stop_musica()
+end
+
 function fase1.draw()
   love.graphics.draw(bac_fase1,loca.x,loca.y,0,love.graphics.getWidth()*1.5/1366,love.graphics.getHeight()*2/768,0,0)
 end

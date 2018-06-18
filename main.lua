@@ -69,7 +69,10 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-  if menus.st == 1 then
+  if menus.st == 3 then
+    menus[3].move(key)
+    switch_menu(menus[3].interacao(key),menus.st)
+  elseif menus.st == 1 then
 	coli = menus[1].getObj()
 	  if key == "return" then
 		  for i = 1,coli.tm,1 do
