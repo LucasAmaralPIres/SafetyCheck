@@ -24,6 +24,7 @@ end
 
 function tela_inicial.draw()
   love.graphics.draw(bac_tel_inic,0,0,0,love.graphics.getWidth()/bac_tel_inic:getWidth(),love.graphics.getHeight()/bac_tel_inic:getHeight(),0,0)
+  love.graphics.rectangle("fill",obj[2].x,obj[2].y,obj[2].w,obj[2].h)
 end
 
 return tela_inicial
