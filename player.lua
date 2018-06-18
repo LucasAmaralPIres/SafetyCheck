@@ -2,7 +2,7 @@ local player = {}
 local p_sprite = {}
 local correr = 1
 local pulando = false
-local p_inf = {p_pos_x = 200, p_pos_y = 600, p_anim_time = 0, p_anim_frame = 1, p_dir = 1, velY = 0}
+local p_inf = {p_pos_x = 0, p_pos_y = 0, p_anim_time = 0, p_anim_frame = 1, p_dir = 1, velY = 0}
 local tileQuads = {}
 local gravidade = 400
 local altura_pulo = 300
@@ -20,6 +20,8 @@ end
 
 function player.load()
   LoadTiles(7,0)
+  p_inf.p_pos_x = (love.graphics.getWidth()*200)/1366
+  p_inf.p_pos_y = (love.graphics.getHeight()*600)/768
 end
 
 function player.setCorrer(n_C)
