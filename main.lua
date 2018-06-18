@@ -28,6 +28,10 @@ function love.keyreleased(key)
   if menus.st == 4 then menus[4][1].keyreleased(key) end
 end
 
+function love.keypressed(key)
+  if key == "up" and player.getvelY() == 0 then player.keypressed("up") end
+end
+
 function love.update(dt)
   if love.keyboard.isDown("lshift") and player.getvelY() == 0 and (menus.st == 1  or menus.st == 4)then player.setCorrer(2) menus[4][1].setCor(2) end
   if love.keyboard.isDown("up") or player.getvelY() ~= 0 then
@@ -65,8 +69,11 @@ function love.update(dt)
       end
     elseif menus.st == 2 then menus[menus.st].andar("left")
     end
+  elseif love.keyboard.isDown("right") then player.andar(dt,"right")
+  elseif love.keyboard.isDown("left") then player.andar(dt,"left")
   end
 end
+
 
 function love.keypressed(key)
   if menus.st == 3 then
