@@ -20,6 +20,12 @@ function tela_pausa.draw()
       love.graphics.rectangle("line", (love.graphics.getWidth() * 632) / 1366,(love.graphics.getHeight() * 411) / 768, (love.graphics.getWidth() * 103) / 1366, (love.graphics.getHeight() * 57) / 768, love.graphics.setLineWidth(15))  
     end
  end 
+
+function tela_pausa.keypressed(key)
+  if key == 'escape' then
+    switch_menu(4,getSt())
+  end
+end
  
  function tela_pausa.move(key)
   if key == "down" then

@@ -5,8 +5,8 @@
   Monitor: Ana Clara Medeiros
   Técnicos: Pietro Pepe Ribeiro, Ana Carolina Junger
 ]]
-
-local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 3}
+io.stdout:setvbuf('no')
+local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 1}
 local col = require "colision"
 local player = require "player"
 
@@ -26,10 +26,6 @@ end
 function love.keyreleased(key)
   player.keyreleased(key)
   if menus.st == 4 then menus[4][1].keyreleased(key) end
-end
-
-function love.keypressed(key)
-  if key == "up" and player.getvelY() == 0 then player.keypressed("up") end
 end
 
 function love.update(dt)
@@ -89,11 +85,24 @@ function love.keypressed(key)
   end
   if key == "up" and player.getvelY() == 0 and (menus.st == 1 or menus.st == 4) then player.keypressed("up") end
   if key == "p" then menus.st = 4 end -- SOMENTE PARA O TESTE DA FASE
+
+  local state = menus[menus.st]
+  if menus.st == 4 then
+    state = state[1]
+  end
+
+  if state.keypressed then
+    state.keypressed(key)
+  end
 end
 
 function switch_menu(novo_menu,velho_menu)
-  menus[velho_menu].stop_musica()
-  menus[novo_menu].play_musica()
+  if menus[velho_menu].stop_musica then
+    menus[velho_menu].stop_musica()
+  end
+  if menus[novo_menu].play_musica then
+    menus[novo_menu].play_musica()
+  end
   menus.st = novo_menu
 end
 

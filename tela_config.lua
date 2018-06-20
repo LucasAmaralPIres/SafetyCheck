@@ -15,6 +15,12 @@ function tela_config.setSel(a)
 	selecionado = a
 end
 
+function tela_config.keypressed(key)
+  if key == 'escape' then
+    switch_menu(1,getSt())
+  end
+end
+
 function tela_config.draw()
   love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.draw(bac_tel_config,0,0,0,love.graphics.getWidth()/bac_tel_config:getWidth(),love.graphics.getHeight()/bac_tel_config:getHeight(),0,0)
