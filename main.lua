@@ -6,9 +6,10 @@
   Técnicos: Pietro Pepe Ribeiro, Ana Carolina Junger
 ]]
 
-local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 3}
+local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 1}
 local col = require "colision"
 local player = require "player"
+local hud = require "hud"
 
 function getSt()
   return menus.st
@@ -20,6 +21,7 @@ function love.load()
   for i = 1, 3, 1 do menus[i].load() end
   menus[4][1].load() -- SOMENTE PARA O TESTE DA FASE
   player.load()
+  hud.load()
   menus[menus.st].play_musica()
 end
 
@@ -76,7 +78,10 @@ end
 
 
 function love.keypressed(key)
-  if menus.st == 3 then
+  if menus.st == 4 then
+    hud.seleciona(key)
+    hud.interacao(key)
+  elseif menus.st == 3 then
     menus[3].move(key)
     switch_menu(menus[3].interacao(key),menus.st)
   elseif menus.st == 1 then
@@ -102,6 +107,7 @@ function love.draw()
   else menus[4][1].draw() -- SOMENTE PARA O TESTE DA FASE
   end
   if menus.st == 1 or menus.st == 4 then player.draw() end
+  if menus.st == 4 then hud.draw() end
 end
 --[[
 valor original - 1366
