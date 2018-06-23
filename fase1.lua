@@ -14,6 +14,15 @@ function fase1.keyreleased(key)
   end
 end
 
+function fase1.stop_musica()
+end
+
+function fase1.keypressed(key)
+  if key == 'escape' then
+    switch_menu(3,getSt())
+  end
+end
+
 function fase1.load()
   bac_fase1 = love.graphics.newImage("Imagens/Fases/Fase 1.png")
   img_destroco = love.graphics.newImage("Imagens/Sprites/Destrocos.png")

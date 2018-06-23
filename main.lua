@@ -91,11 +91,17 @@ function love.keypressed(key)
   end
   if key == "up" and player.getvelY() == 0 and (menus.st == 1 or menus.st == 4) then player.keypressed("up") end
   if key == "p" then menus.st = 4 end -- SOMENTE PARA O TESTE DA FASE
+
+
 end
 
 function switch_menu(novo_menu,velho_menu)
-  menus[velho_menu].stop_musica()
-  menus[novo_menu].play_musica()
+  if menus[velho_menu].stop_musica then
+    menus[velho_menu].stop_musica()
+  end
+  if menus[novo_menu].play_musica then
+    menus[novo_menu].play_musica()
+  end
   menus.st = novo_menu
 end
 
