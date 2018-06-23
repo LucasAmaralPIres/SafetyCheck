@@ -21,6 +21,7 @@ function tela_pausa.draw()
     end
  end 
 
+
 function tela_pausa.keypressed(key)
   if key == 'escape' then
     switch_menu(4,getSt())
@@ -41,7 +42,8 @@ end
   end
   return sel_pause
 end
- function tela_pausa.interacao(key)
+
+function tela_pausa.interacao(key)
   if key == "return" then
     if sel_pause == 1 then
       called = 2
