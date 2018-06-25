@@ -1,10 +1,12 @@
 local hud = {}
 local sel_item = 1
-local call_item = 1
+local call_item = 0
 local item01 = 0
 local item02 = 0
 local item03 = 0
 local item04 = 0
+local stamina = 520
+local correr = 1
 
 function hud.load()
   bac_hud = love.graphics.newImage("Imagens/HUD/hud.png")
@@ -18,9 +20,8 @@ function hud.draw()
   love.graphics.setColor(255,255,255,255)
   love.graphics.draw(bac_hud,0,0,0,love.graphics.getWidth()/2350,love.graphics.getHeight()/1440,0,0)
   love.graphics.setColor(154, 205, 50, 255)
-  love.graphics.rectangle("fill",(love.graphics.getWidth()*78)/2350,(love.graphics.getHeight()*60)/1440,(love.graphics.getWidth()*520)/2350,(love.graphics.getHeight()*69)/1440,love.graphics.setLineWidth(5))
+  love.graphics.rectangle("fill",(love.graphics.getWidth()*78)/2350,(love.graphics.getHeight()*60)/1440,(love.graphics.getWidth()*stamina)/2350,(love.graphics.getHeight()*69)/1440,love.graphics.setLineWidth(5))
   if sel_item == 1 then
-    
       love.graphics.setColor(154, 205, 50, 255)
       love.graphics.rectangle("line", (love.graphics.getWidth() * 2161) / 2350,(love.graphics.getHeight() * 590) / 1440, (love.graphics.getWidth() * 142) / 2350, (love.graphics.getHeight() *294) / 1440, love.graphics.setLineWidth(5))
       love.graphics.setColor(255,255,255,255)
@@ -37,6 +38,7 @@ function hud.draw()
       love.graphics.rectangle("line", (love.graphics.getWidth() * 2008) / 2350,(love.graphics.getHeight() * 1202) / 1440, (love.graphics.getWidth() * 294) / 2350, (love.graphics.getHeight() *142) / 1440, love.graphics.setLineWidth(5))
       love.graphics.setColor(255,255,255,255)
   end
+
   if item01 == 1 then
     love.graphics.draw(extintor,(love.graphics.getWidth() * 2172) / 2350,(love.graphics.getHeight() * 603) / 1440,0,0.07,0.07)
   end
@@ -79,16 +81,24 @@ end
   return call_item
  end
 
-function hud.addItem(key)
-  if key == "5" then
-    item01 = 1
-  elseif key == "6" then
-    item02 = 1
-  elseif key == "7" then
-    item03 = 1
-  elseif key == "8" then
-    item04 = 1
-  end
- end
- 
+function hud.correr(ncorrer)
+  correr = ncorrer
+end
+
+ function hud.keyreleased(key)
+   if key == "lshift" then
+     correr = 1
+   end
+end
+
+function hud.stamina(key)
+  if correr ~= 1 and stamina > 0 then
+    if key == "left" or key == "right" then
+      stamina = stamina - 2
+    end
+  elseif stamina < 520 and correr == 1 then 
+    stamina = stamina + 0.5
+  end 
+end
+
 return hud
