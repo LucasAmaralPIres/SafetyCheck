@@ -1,5 +1,4 @@
 local tela_config = {}
-
 local pos_conf_x_1 = 837.5
 local pos_conf_x_2 = 837.5
 local vol1 = 0.5
@@ -13,6 +12,12 @@ end
 
 function tela_config.setSel(a)
 	selecionado = a
+end
+
+function tela_config.keypressed(key)
+  if key == 'escape' then
+    switch_menu(1,getSt())
+  end
 end
 
 function tela_config.draw()

@@ -35,7 +35,7 @@ function player.getvelY()
 end
 
 function player.getRet()
-  return {x = p_inf.p_pos_x, y = p_inf.p_pos_y, w = p_sprite:getWidth()/7, h = p_sprite:getHeight()/2}
+  return {x = p_inf.p_pos_x-1.1*p_inf.p_dir*p_sprite:getWidth()/8, y = p_inf.p_pos_y-1.5*p_sprite:getHeight()/2, w = 1.2*p_inf.p_dir*p_sprite:getWidth()/7, h = 1.7*p_sprite:getHeight()}
 end
 
 function player.keyreleased(key)
@@ -96,7 +96,6 @@ end
 
 function player.draw()
   love.graphics.draw(p_sprite, tileQuads[p_inf.p_anim_frame], p_inf.p_pos_x, p_inf.p_pos_y,0,p_inf.p_dir*2,2,p_sprite:getWidth()/14,p_sprite:getHeight()/2)
-  love.graphics.rectangle("fill",p_inf.p_pos_x,p_inf.p_pos_y,p_sprite:getWidth()/7,p_sprite:getHeight()/2)
 end
 
 return player

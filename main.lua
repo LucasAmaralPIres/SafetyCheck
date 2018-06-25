@@ -9,6 +9,7 @@
 local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 1}
 local col = require "colision"
 local player = require "player"
+local hud = require "hud"
 
 function getSt()
   return menus.st
@@ -20,16 +21,24 @@ function love.load()
   for i = 1, 3, 1 do menus[i].load() end
   menus[4][1].load() -- SOMENTE PARA O TESTE DA FASE
   player.load()
+  hud.load()
   menus[menus.st].play_musica()
 end
 
 function love.keyreleased(key)
   player.keyreleased(key)
-  if menus.st == 4 then menus[4][1].keyreleased(key) end
+  if menus.st == 4 then 
+    menus[4][1].keyreleased(key) 
+    hud.keyreleased(key)
+  end
 end
 
 function love.update(dt)
-  if love.keyboard.isDown("lshift") and player.getvelY() == 0 and (menus.st == 1  or menus.st == 4)then player.setCorrer(2) menus[4][1].setCor(2) end
+  if love.keyboard.isDown("lshift") and player.getvelY() == 0 and (menus.st == 1  or menus.st == 4)then 
+    player.setCorrer(2) 
+    menus[4][1].setCor(2)
+    hud.correr(2)
+  end
   if love.keyboard.isDown("up") or player.getvelY() ~= 0 then
     if menus.st == 1 or menus.st == 4 then player.pular(dt)
     elseif menus.st == 2 then menus[menus.st].setSel(1)
@@ -65,11 +74,27 @@ function love.update(dt)
       end
     elseif menus.st == 2 then menus[menus.st].andar("left")
     end
+  elseif love.keyboard.isDown("right") then player.andar(dt,"right")
+  elseif love.keyboard.isDown("left") then player.andar(dt,"left")
+  end
+  if menus.st == 4 then 
+    menus[4][1].update() 
+    if love.keyboard.isDown("right") then
+      hud.stamina("right")
+    elseif love.keyboard.isDown("left") then
+      hud.stamina("left")
+    else 
+      hud.stamina()
+    end
   end
 end
 
+
 function love.keypressed(key)
-  if menus.st == 3 then
+  if menus.st == 4 then
+    hud.seleciona(key)
+    hud.interacao(key)
+  elseif menus.st == 3 then
     menus[3].move(key)
     switch_menu(menus[3].interacao(key),menus.st)
   elseif menus.st == 1 then
@@ -82,11 +107,17 @@ function love.keypressed(key)
   end
   if key == "up" and player.getvelY() == 0 and (menus.st == 1 or menus.st == 4) then player.keypressed("up") end
   if key == "p" then menus.st = 4 end -- SOMENTE PARA O TESTE DA FASE
+
+
 end
 
 function switch_menu(novo_menu,velho_menu)
-  menus[velho_menu].stop_musica()
-  menus[novo_menu].play_musica()
+  if menus[velho_menu].stop_musica then
+    menus[velho_menu].stop_musica()
+  end
+  if menus[novo_menu].play_musica then
+    menus[novo_menu].play_musica()
+  end
   menus.st = novo_menu
 end
 
@@ -95,6 +126,7 @@ function love.draw()
   else menus[4][1].draw() -- SOMENTE PARA O TESTE DA FASE
   end
   if menus.st == 1 or menus.st == 4 then player.draw() end
+  if menus.st == 4 then hud.draw() end
 end
 --[[
 valor original - 1366
