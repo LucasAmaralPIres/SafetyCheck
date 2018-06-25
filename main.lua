@@ -78,6 +78,7 @@ function love.keypressed(key)
   if menus.st == 4 then
     hud.seleciona(key)
     hud.interacao(key)
+    hud.addItem(key)
   elseif menus.st == 3 then
     menus[3].move(key)
     switch_menu(menus[3].interacao(key),menus.st)
