@@ -23,6 +23,10 @@ function fase1.keypressed(key)
   end
 end
 
+function fase1.tratar_main(key,playerinfo)
+  if key == "lshift" and playerinfo == 0 then setCor(2) end
+end
+
 function fase1.load()
   bac_fase1 = love.graphics.newImage("Imagens/Fases/Fase 1.png")
   img_destroco = love.graphics.newImage("Imagens/Sprites/Destrocos.png")

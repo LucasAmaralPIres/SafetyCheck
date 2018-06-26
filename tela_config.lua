@@ -24,16 +24,15 @@ function tela_config.draw()
   love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.draw(bac_tel_config,0,0,0,love.graphics.getWidth()/bac_tel_config:getWidth(),love.graphics.getHeight()/bac_tel_config:getHeight(),0,0)
   if selecionado == 1 then
-      love.graphics.setColor(154, 205, 50, 255)
-      love.graphics.rectangle("fill", (love.graphics.getWidth() * pos_conf_x_1) / 1366,(love.graphics.getHeight() * 419) / 768, (love.graphics.getWidth() * 20) / 1366, (love.graphics.getHeight() * 11) / 768)
-      love.graphics.setColor(255, 255, 255, 255)
-      love.graphics.rectangle("fill", (love.graphics.getWidth() * pos_conf_x_2) / 1366,(love.graphics.getHeight() * 516.5) / 768, (love.graphics.getWidth() * 20) / 1366, (love.graphics.getHeight() * 11) / 768)
+    love.graphics.setColor(154, 205, 50, 255)
+    love.graphics.rectangle("fill", (love.graphics.getWidth() * pos_conf_x_1) / 1366,(love.graphics.getHeight() * 419) / 768, (love.graphics.getWidth() * 20) / 1366, (love.graphics.getHeight() * 11) / 768)
+    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.rectangle("fill", (love.graphics.getWidth() * pos_conf_x_2) / 1366,(love.graphics.getHeight() * 516.5) / 768, (love.graphics.getWidth() * 20) / 1366, (love.graphics.getHeight() * 11) / 768)
   elseif selecionado == 2 then
-      love.graphics.setColor(255, 255, 255, 255)
-      love.graphics.rectangle("fill", (love.graphics.getWidth() * pos_conf_x_1) / 1366,(love.graphics.getHeight() * 419) / 768, (love.graphics.getWidth() * 20) / 1366, (love.graphics.getHeight() * 11) / 768)
-      love.graphics.setColor(154, 205, 50, 255)
-
-      love.graphics.rectangle("fill", (love.graphics.getWidth() * pos_conf_x_2) / 1366,(love.graphics.getHeight() * 516.5) / 768, (love.graphics.getWidth() * 20) / 1366, (love.graphics.getHeight() * 11) / 768)
+    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.rectangle("fill", (love.graphics.getWidth() * pos_conf_x_1) / 1366,(love.graphics.getHeight() * 419) / 768, (love.graphics.getWidth() * 20) / 1366, (love.graphics.getHeight() * 11) / 768)
+    love.graphics.setColor(154, 205, 50, 255)
+    love.graphics.rectangle("fill", (love.graphics.getWidth() * pos_conf_x_2) / 1366,(love.graphics.getHeight() * 516.5) / 768, (love.graphics.getWidth() * 20) / 1366, (love.graphics.getHeight() * 11) / 768)
   end
 end
 

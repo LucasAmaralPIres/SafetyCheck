@@ -26,68 +26,45 @@ function love.load()
 end
 
 function love.keyreleased(key)
-  player.keyreleased(key)
-  if menus.st == 4 then 
+  if menus.st == 4  then 
+    player.keyreleased(key)
     menus[4][1].keyreleased(key) 
     hud.keyreleased(key)
-  end
+  elseif menus.st == 1 then player.keyreleased(key) end
 end
 
 function love.update(dt)
-  if love.keyboard.isDown("lshift") and player.getvelY() == 0 and (menus.st == 1  or menus.st == 4)then 
-    player.setCorrer(2) 
-    menus[4][1].setCor(2)
-    hud.correr(2)
+  if menus.st == 1 or menus.st == 4 then 
+    if player.getvelY() == 0 then
+      if love.keyboard.isDown("lshift") then 
+        player.setCorrer(2) 
+        menus[4][1].setCor(2)
+        hud.correr(2)
+      end
+      if love.keyboard.isDown("up") then player.pular(dt) end
+      if love.keyboard.isDown("right") then player.andar(dt,"right") if menus.st == 4 then menus[4][1].andar(dt,"right") end
+      elseif love.keyboard.isDown("left") then player.andar(dt,"left") if menus.st == 4 then menus[4][1].andar(dt,"left") end
+      end
+    else
+      player.pular(dt)
+      if player.ger_dir() == 1 then player.andar(dt,"right") if menus.st == 4 then menus[4][1].andar(dt,"right") end
+      else player.andar(dt,"left") if menus.st == 4 then menus[4][1].andar(dt,"left") end
+      end
+    end
   end
-  if love.keyboard.isDown("up") or player.getvelY() ~= 0 then
-    if menus.st == 1 or menus.st == 4 then player.pular(dt)
-    elseif menus.st == 2 then menus[menus.st].setSel(1)
-	end
-  elseif love.keyboard.isDown("down") then
-    if menus.st == 2 then menus[menus.st].setSel(2) end
-  end
-  if player.getvelY() ~= 0 and (menus.st == 1 or menus.st == 4) then
-    if player.ger_dir() == 1 then 
-      player.andar(dt,"right")
-      if menus.st == 4 then
-        menus[4][1].andar(dt,"right")
-      end
-    else 
-      player.andar(dt,"left")
-      if menus.st == 4 then
-        menus[4][1].andar(dt,"left")
-      end
-    end
-  elseif love.keyboard.isDown("right") then
-    if menus.st == 1 or menus.st == 4 then 
-      player.andar(dt,"right")
-      if menus.st == 4 then
-        menus[4][1].andar(dt,"right")
-      end
-    elseif menus.st == 2 then menus[menus.st].andar("right")
-    end
-  elseif love.keyboard.isDown("left") then
-    if menus.st == 1  or menus.st == 4 then 
-      player.andar(dt,"left")
-      if menus.st == 4 then
-        menus[4][1].andar(dt,"left")
-      end
-    elseif menus.st == 2 then menus[menus.st].andar("left")
-    end
-  elseif love.keyboard.isDown("right") then player.andar(dt,"right")
-  elseif love.keyboard.isDown("left") then player.andar(dt,"left")
+  if menus.st == 2 then
+    if love.keyboard.isDown("up") then menus[menus.st].setSel(1)
+    elseif love.keyboard.isDown("down") then menus[menus.st].setSel(2)
+    elseif love.keyboard.isDown("right") then menus[menus.st].andar("right")
+    elseif love.keyboard.isDown("left") then menus[menus.st].andar("left") end
   end
   if menus.st == 4 then 
     menus[4][1].update() 
-    if love.keyboard.isDown("right") then
-      hud.stamina("right")
-    elseif love.keyboard.isDown("left") then
-      hud.stamina("left")
-    else 
-      hud.stamina()
+    if love.keyboard.isDown("right") then hud.stamina("right")
+    elseif love.keyboard.isDown("left") then hud.stamina("left")
+    else hud.stamina()
     end
   end
-  if menus.st == 4 then menus[4][1].update() end
 end
 
 
@@ -95,12 +72,11 @@ function love.keypressed(key)
   if menus.st == 4 then
     hud.seleciona(key)
     hud.interacao(key)
-    hud.addItem(key)
   elseif menus.st == 3 then
     menus[3].move(key)
     switch_menu(menus[3].interacao(key),menus.st)
   elseif menus.st == 1 then
-	coli = menus[1].getObj()
+    coli = menus[1].getObj()
 	  if key == "return" then
 		  for i = 1,coli.tm,1 do
 			  if col.retangulo_retangulo(coli[i],player.getRet()) then coli[i].acao() end
@@ -109,8 +85,6 @@ function love.keypressed(key)
   end
   if key == "up" and player.getvelY() == 0 and (menus.st == 1 or menus.st == 4) then player.keypressed("up") end
   if key == "p" then menus.st = 4 end -- SOMENTE PARA O TESTE DA FASE
-
-
 end
 
 function switch_menu(novo_menu,velho_menu)
@@ -127,8 +101,9 @@ function love.draw()
   if menus.st ~= 4 then menus[menus.st].draw()
   else menus[4][1].draw() -- SOMENTE PARA O TESTE DA FASE
   end
-  if menus.st == 1 or menus.st == 4 then player.draw() end
-  if menus.st == 4 then hud.draw() end
+  if menus.st == 4 then player.draw() hud.draw()
+  elseif menus.st == 1  then player.draw() 
+  end
 end
 --[[
 valor original - 1366
