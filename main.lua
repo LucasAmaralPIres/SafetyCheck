@@ -7,7 +7,7 @@
 ]]
 
 local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 1}
-local col = require "colision"
+col = require "colision"
 local player = require "player"
 local hud = require "hud"
 
@@ -42,13 +42,13 @@ function love.update(dt)
         hud.correr(2)
       end
       if love.keyboard.isDown("up") then player.pular(dt) end
-      if love.keyboard.isDown("right") then player.andar(dt,"right") if menus.st == 4 then menus[4][1].andar(dt,"right") end
-      elseif love.keyboard.isDown("left") then player.andar(dt,"left") if menus.st == 4 then menus[4][1].andar(dt,"left") end
+      if love.keyboard.isDown("right") then player.andar(dt,"right") if menus.st == 4 then menus[4][1].andar(dt) end
+      elseif love.keyboard.isDown("left") then player.andar(dt,"left") if menus.st == 4 then menus[4][1].andar(dt) end
       end
     else
       player.pular(dt)
-      if player.ger_dir() == 1 then player.andar(dt,"right") if menus.st == 4 then menus[4][1].andar(dt,"right") end
-      else player.andar(dt,"left") if menus.st == 4 then menus[4][1].andar(dt,"left") end
+      if player.ger_dir() == 1 then player.andar(dt,"right") if menus.st == 4 then menus[4][1].andar(dt) end
+      else player.andar(dt,"left") if menus.st == 4 then menus[4][1].andar(dt) end
       end
     end
   end
@@ -70,6 +70,7 @@ end
 
 function love.keypressed(key)
   if menus.st == 4 then
+    menus[4][1].coli(player.getRet(),key)
     hud.seleciona(key)
     hud.interacao(key)
   elseif menus.st == 3 then
@@ -105,6 +106,7 @@ function love.draw()
   elseif menus.st == 1  then player.draw() 
   end
 end
+
 --[[
 valor original - 1366
 x - love.graphics.getWidth()
