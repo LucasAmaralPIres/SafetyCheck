@@ -1,4 +1,4 @@
---[[
+﻿--[[
   Game: Safety Check
   Desenvolvedores: Arthur de Lima Ozorio, Douglas Pereira Pessoa, Jefferson Jose da Silva, Lucas d'Amaral Pires, Lucas Muller Baccar.
   Professor: Pedro Igor Porfirio Sampaio
@@ -18,6 +18,8 @@ end
 function love.load()
   love.window.setTitle("Safety Check")
   love.window.setFullscreen(true,"desktop")
+  cons_w = love.graphics.getWidth()/1366
+  cons_h = love.graphics.getHeight()/768
   for i = 1, 3, 1 do menus[i].load() end
   menus[4][1].load() -- SOMENTE PARA O TESTE DA FASE
   player.load()
@@ -77,12 +79,7 @@ function love.keypressed(key)
     menus[3].move(key)
     switch_menu(menus[3].interacao(key),menus.st)
   elseif menus.st == 1 then
-    coli = menus[1].getObj()
-	  if key == "return" then
-		  for i = 1,coli.tm,1 do
-			  if col.retangulo_retangulo(coli[i],player.getRet()) then coli[i].acao() end
-		  end
-	  end
+    menus[menus.st].coli(key,player.getRet())
   end
   if key == "up" and player.getvelY() == 0 and (menus.st == 1 or menus.st == 4) then player.keypressed("up") end
   if key == "p" then menus.st = 4 end -- SOMENTE PARA O TESTE DA FASE

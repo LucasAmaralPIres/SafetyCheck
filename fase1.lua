@@ -4,6 +4,7 @@ local correr = 1
 local destr = {}
 local spawn = 0
 local dific = 200
+local obj, sprite_back
 
 function fase1.setCor(ncorrer)
   correr = ncorrer
@@ -28,8 +29,6 @@ function fase1.tratar_main(key,playerinfo)
 end
 
 function fase1.load()
-  cons_w = love.graphics.getWidth()/1366
-  cons_h = love.graphics.getHeight()/768
   posicaox = -103
   obj = {{tm=1, {x=76  ,y=250,w=170,h=450, acao = function() tela = 2 posicaox = 227   end}},
          {tm=2, {x=2900,y=250,w=170,h=450, acao = function() tela = 3 posicaox = -3900 end},
