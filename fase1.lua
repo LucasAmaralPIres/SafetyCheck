@@ -4,7 +4,7 @@ local correr = 1
 local destr = {}
 local spawn = 0
 local dific = 200
-local obj, sprite_back
+local obj, sprite_back, posicaox
 
 function fase1.setCor(ncorrer)
   correr = ncorrer

@@ -6,10 +6,11 @@
   Técnicos: Pietro Pepe Ribeiro, Ana Carolina Junger
 ]]
 
-local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1"},st = 1}
+local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1", require "fase2"},st = 1}
 col = require "colision"
 local player = require "player"
 local hud = require "hud"
+local fase = 1
 
 function getSt()
   return menus.st
@@ -22,6 +23,7 @@ function love.load()
   cons_h = love.graphics.getHeight()/768
   for i = 1, 3, 1 do menus[i].load() end
   menus[4][1].load() -- SOMENTE PARA O TESTE DA FASE
+  menus[4][2].load()
   player.load()
   hud.load()
   menus[menus.st].play_musica()
@@ -30,7 +32,7 @@ end
 function love.keyreleased(key)
   if menus.st == 4  then 
     player.keyreleased(key)
-    menus[4][1].keyreleased(key) 
+    menus[4][fase].keyreleased(key) 
     hud.keyreleased(key)
   elseif menus.st == 1 then player.keyreleased(key) end
 end
@@ -40,17 +42,17 @@ function love.update(dt)
     if player.getvelY() == 0 then
       if love.keyboard.isDown("lshift") then 
         player.setCorrer(2) 
-        menus[4][1].setCor(2)
+        menus[4][fase].setCor(2)
         hud.correr(2)
       end
       if love.keyboard.isDown("up") then player.pular(dt) end
-      if love.keyboard.isDown("right") then player.andar(dt,"right") if menus.st == 4 then menus[4][1].andar(dt) end
-      elseif love.keyboard.isDown("left") then player.andar(dt,"left") if menus.st == 4 then menus[4][1].andar(dt) end
+      if love.keyboard.isDown("right") then player.andar(dt,"right") if menus.st == 4 then menus[4][fase].andar(dt) end
+      elseif love.keyboard.isDown("left") then player.andar(dt,"left") if menus.st == 4 then menus[4][fase].andar(dt) end
       end
     else
       player.pular(dt)
-      if player.ger_dir() == 1 then player.andar(dt,"right") if menus.st == 4 then menus[4][1].andar(dt) end
-      else player.andar(dt,"left") if menus.st == 4 then menus[4][1].andar(dt) end
+      if player.ger_dir() == 1 then player.andar(dt,"right") if menus.st == 4 then menus[4][fase].andar(dt) end
+      else player.andar(dt,"left") if menus.st == 4 then menus[4][fase].andar(dt) end
       end
     end
   end
@@ -61,7 +63,7 @@ function love.update(dt)
     elseif love.keyboard.isDown("left") then menus[menus.st].andar("left") end
   end
   if menus.st == 4 then 
-    menus[4][1].update() 
+    menus[4][fase].update() 
     if love.keyboard.isDown("right") then hud.stamina("right")
     elseif love.keyboard.isDown("left") then hud.stamina("left")
     else hud.stamina()
@@ -72,7 +74,7 @@ end
 
 function love.keypressed(key)
   if menus.st == 4 then
-    menus[4][1].coli(player.getRet(),key)
+    menus[4][fase].coli(player.getRet(),key)
     hud.seleciona(key)
     hud.interacao(key)
   elseif menus.st == 3 then
@@ -82,7 +84,8 @@ function love.keypressed(key)
     menus[menus.st].coli(key,player.getRet())
   end
   if key == "up" and player.getvelY() == 0 and (menus.st == 1 or menus.st == 4) then player.keypressed("up") end
-  if key == "p" then menus.st = 4 end -- SOMENTE PARA O TESTE DA FASE
+  if key == "p" then menus.st = 4 fase = 1 end -- SOMENTE PARA O TESTE DA FASE
+  if key == "q" then menus.st = 4 fase = 2 end -- SOMENTE PARA O TESTE DA FASE
 end
 
 function switch_menu(novo_menu,velho_menu)
@@ -97,7 +100,7 @@ end
 
 function love.draw()
   if menus.st ~= 4 then menus[menus.st].draw()
-  else menus[4][1].draw() -- SOMENTE PARA O TESTE DA FASE
+  else menus[4][fase].draw() -- SOMENTE PARA O TESTE DA FASE
   end
   if menus.st == 4 then player.draw() hud.draw()
   elseif menus.st == 1  then player.draw() 
