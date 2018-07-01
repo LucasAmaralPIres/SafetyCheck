@@ -1,5 +1,5 @@
 local fase1 = {}
-local tela = 8
+local tela = 1
 local correr = 1
 local destr = {}
 local spawn = 0
