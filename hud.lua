@@ -21,6 +21,11 @@ function hud.draw()
   love.graphics.draw(bac_hud,0,0,0,love.graphics.getWidth()/2350,love.graphics.getHeight()/1440,0,0)
   love.graphics.setColor(154, 205, 50, 255)
   love.graphics.rectangle("fill",(love.graphics.getWidth()*78)/2350,(love.graphics.getHeight()*60)/1440,(love.graphics.getWidth()*stamina)/2350,(love.graphics.getHeight()*69)/1440,love.graphics.setLineWidth(5))
+  if morte.getMorte() < 10 then
+    love.graphics.print(morte.getMorte(), cons_w * 1290, cons_h * 20, 0, 10, 10)
+  else 
+    love.graphics.print(morte.getMorte(), cons_w * 1290, cons_h * 45, 0, 5, 5)
+  end
   if sel_item == 1 then
       love.graphics.setColor(154, 205, 50, 255)
       love.graphics.rectangle("line", (love.graphics.getWidth() * 2161) / 2350,(love.graphics.getHeight() * 590) / 1440, (love.graphics.getWidth() * 142) / 2350, (love.graphics.getHeight() *294) / 1440, love.graphics.setLineWidth(5))

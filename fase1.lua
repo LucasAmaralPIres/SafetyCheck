@@ -1,5 +1,5 @@
 local fase1 = {}
-local tela = 1
+local tela = 8
 local correr = 1
 local destr = {}
 local spawn = 0
@@ -19,13 +19,15 @@ function fase1.stop_musica()
 end
 
 function fase1.keypressed(key)
-  if key == 'escape' then
-    switch_menu(3,getSt())
+  if morte.getDeath() == 0 then
+    if key == 'escape' then
+      switch_menu(3,getSt())
+    end
+  else 
+    if key == "up" or key == "down" then morte.move(key)
+    elseif key == "return" then morte.interacao()
+    end
   end
-end
-
-function fase1.tratar_main(key,playerinfo)
-  if key == "lshift" and playerinfo == 0 then setCor(2) end
 end
 
 function fase1.load()
@@ -43,7 +45,7 @@ function fase1.load()
                 {x=73  ,y=250,w=170,h=450, acao = function() tela = 5 posicaox = -670  end}},
          {tm=2, {x=3220,y=250,w=170,h=450, acao = function() tela = 8 posicaox = -2300 end},
                 {x=107 ,y=250,w=170,h=450, acao = function() tela = 6 posicaox = -80   end}},
-         {tm=1, {x=1264,y=250,w=170,h=450, acao = function() tela = 9 end}}}
+         {tm=1, {x=1264,y=250,w=170,h=450, acao = function() morte.death("Queimado") end}}}
   sprite_back = {{love.graphics.newImage("Imagens/Fases/Fase1/Fase1-01.png"),lim_esq = -103 ,lim_dir = 227},
                  {love.graphics.newImage("Imagens/Fases/Fase1/Fase1-02.png"),lim_esq = -3263,lim_dir = 190},
                  {love.graphics.newImage("Imagens/Fases/Fase1/Fase1-03.png"),lim_esq = -3900,lim_dir = 223},
@@ -56,8 +58,10 @@ function fase1.load()
 end
 
 function fase1.andar(dt)
-  if love.keyboard.isDown("left") and posicaox < (sprite_back[tela].lim_dir*cons_w) then posicaox = posicaox + (700*dt) 
-  elseif love.keyboard.isDown("right") and posicaox > (sprite_back[tela].lim_esq*cons_w) then posicaox = posicaox - (700*dt) 
+  if morte.getDeath() == 0 then
+    if love.keyboard.isDown("left") and posicaox < (sprite_back[tela].lim_dir*cons_w) then posicaox = posicaox + (700*dt) 
+    elseif love.keyboard.isDown("right") and posicaox > (sprite_back[tela].lim_esq*cons_w) then posicaox = posicaox - (700*dt) 
+    end
   end
 end
 
@@ -70,8 +74,8 @@ function fase1.stop_musica()
 end
 
 function fase1.coli(per,key)
-  if key == 'return' then
-    for i = 1,obj[tela].tm,1 do 
+  if key == 'return' and morte.getDeath() == 0 then
+    for i = 1,obj[tela].tm,1 do
       if col.retangulo_retangulo({x=(obj[tela][i].x+posicaox)*cons_w,y=obj[tela][i].y*cons_h,w=obj[tela][i].w*cons_w,h=obj[tela][1].h*cons_h},per) then
         obj[tela][i].acao() 
         break
@@ -81,9 +85,14 @@ function fase1.coli(per,key)
 end
 
 function fase1.draw()
-  love.graphics.draw(sprite_back[tela][1],posicaox*cons_w,92*cons_h,0,1,cons_h*1.78,0,0)
-  for index,v in ipairs(destr) do 
-    love.graphics.draw(img_destroco, v.x + posicaox, v.y,0,(0.5*love.graphics.getWidth())/1366,(0.5*love.graphics.getHeight())/768,0,0,0,0)
+  if morte.getDeath() == 0 then
+    love.graphics.draw(sprite_back[tela][1],posicaox*cons_w,92*cons_h,0,1,cons_h*1.78,0,0)
+    for index,v in ipairs(destr) do 
+      love.graphics.draw(img_destroco, v.x + posicaox, v.y,0,(0.5*love.graphics.getWidth())/1366,(0.5*love.graphics.getHeight())/768,0,0,0,0)
+    end
+    if tela == 8 then love.graphics.rectangle("fill",(obj[tela][1].x+posicaox)*cons_w,obj[tela][1].y*cons_h,obj[tela][1].w*cons_w,obj[tela][1].h*cons_h) end
+  else
+    morte.draw()
   end
 end
 
@@ -91,7 +100,7 @@ function fase1.update()
   spawn = spawn + 1
   if (spawn == dific) then
     a = love.math.random(sprite_back[tela].lim_esq*cons_w,(sprite_back[tela].lim_dir-sprite_back[tela].lim_esq)*cons_w)
-    print(a)
+    --print(a)
     table.insert(destr,{x = a, y = 0})
     spawn = 0
     if (dific > 10) then

@@ -61,7 +61,6 @@ function fase2.coli(per,key)
 end
 
 function fase2.draw()
-  print(posicaox)
   love.graphics.draw(sprite_back[tela][1],posicaox*cons_w,92*cons_h,0,1,cons_h*1.78,0,0)
 end
 

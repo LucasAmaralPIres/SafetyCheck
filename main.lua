@@ -7,6 +7,7 @@
 ]]
 
 local menus = {require "tela_inicial", require "tela_config", require "tela_pausa", {require "fase1", require "fase2"},st = 1}
+morte = require "tela_morte"
 col = require "colision"
 local player = require "player"
 local hud = require "hud"
@@ -24,6 +25,7 @@ function love.load()
   for i = 1, 3, 1 do menus[i].load() end
   menus[4][1].load() -- SOMENTE PARA O TESTE DA FASE
   menus[4][2].load()
+  morte.load()
   player.load()
   hud.load()
   menus[menus.st].play_musica()
@@ -74,7 +76,8 @@ end
 
 function love.keypressed(key)
   if menus.st == 4 then
-    menus[4][fase].coli(player.getRet(),key)
+    menus[4][fase].keypressed(key)
+    if morte.getCo() == true then menus[4][fase].coli(player.getRet(),key) else morte.setCo(true) end
     hud.seleciona(key)
     hud.interacao(key)
   elseif menus.st == 3 then
@@ -102,7 +105,7 @@ function love.draw()
   if menus.st ~= 4 then menus[menus.st].draw()
   else menus[4][fase].draw() -- SOMENTE PARA O TESTE DA FASE
   end
-  if menus.st == 4 then player.draw() hud.draw()
+  if menus.st == 4 and morte.getDeath() == 0 then player.draw() hud.draw()
   elseif menus.st == 1  then player.draw() 
   end
 end
