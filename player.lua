@@ -2,7 +2,7 @@ local player = {}
 local p_sprite = {}
 local correr = 1
 local pulando = false
-local p_inf = {p_pos_x = 200, p_pos_y = 600, p_anim_time = 0, p_anim_frame = 1, p_dir = 1, velY = 0}
+local p_inf = {p_pos_x = 200, p_pos_y = 620, p_anim_time = 0, p_anim_frame = 1, p_dir = 1, velY = 0}
 local tileQuads = {}
 local gravidade = 400
 local altura_pulo = 300
@@ -54,23 +54,23 @@ function player.pular(dt)
   if p_inf.velY ~= 0 then
     p_inf.p_pos_y = p_inf.p_pos_y - p_inf.velY   * dt
     p_inf.velY = p_inf.velY - gravidade * dt
-    if p_inf.p_pos_y > 600 then
+    if p_inf.p_pos_y > 620 then
       p_inf.velY = 0
-      p_inf.p_anim_frame = 1
-      p_inf.p_pos_y = 600
+      p_inf.p_anim_frame = 0
+      p_inf.p_pos_y = 620
     end
   end
 end
 
-function player.andar(dt,key)
-  if key == "right" then
+function player.andar(dt,key,fase_inf)
+  if key == "right" and fase_inf.p < fase_inf.ld then
     n_pos(200*dt*correr)
     p_inf.p_dir = 1
-  elseif key == "left" then
+  elseif key == "left" and fase_inf.p > fase_inf.le then
     n_pos((-1)*200*dt*correr)
     p_inf.p_dir = -1
   end
-  if p_inf.velY == 0 then
+  if p_inf.velY == 0 and (fase_inf.p < fase_inf.ld or fase_inf.p > fase_inf.le) then
     if p_inf.p_anim_time > 10 then
       p_inf.p_anim_frame = p_inf.p_anim_frame + 1
       if p_inf.p_anim_frame > 7
@@ -95,7 +95,7 @@ function player.keypressed(key)
 end
 
 function player.draw()
-  love.graphics.draw(p_sprite, tileQuads[p_inf.p_anim_frame], p_inf.p_pos_x, p_inf.p_pos_y,0,p_inf.p_dir*2,2,p_sprite:getWidth()/14,p_sprite:getHeight()/2)
+  love.graphics.draw(p_sprite, tileQuads[p_inf.p_anim_frame], p_inf.p_pos_x * cons_w, p_inf.p_pos_y * cons_h,0,p_inf.p_dir*2,2,p_sprite:getWidth()/14,p_sprite:getHeight()/2)
 end
 
 return player

@@ -42,6 +42,7 @@ function fase2.load()
         {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 2 posicaox = 250 end}},
         {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 2 posicaox = 250 end}},
         {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 4 posicaox = 250 end}}}
+
   sprite_back = {{love.graphics.newImage("Imagens/Fases/Fase2/Fase2-01.png"),lim_esq = -2686,lim_dir = 152},
                 {love.graphics.newImage("Imagens/Fases/Fase2/Fase2-02.png"),lim_esq = -2686,lim_dir = 161},
                 {love.graphics.newImage("Imagens/Fases/Fase2/Fase2-03.png"),lim_esq=159,lim_dir=159},
