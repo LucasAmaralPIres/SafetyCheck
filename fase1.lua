@@ -105,7 +105,7 @@ end
 function fase1.update(per)
   if morte.getDeath() == 0 then spawn = spawn + 1 end
   if (spawn == dific) then
-    a = love.math.random(sprite_back[tela].lim_esq*cons_w,(sprite_back[tela].lim_dir-sprite_back[tela].lim_esq)*cons_w)
+    a = love.math.random(0,sprite_back[tela][1]:getWidth())
     --print(a)
     table.insert(destr,{x = a, y = 0, acao = function() morte.death("Esmagado") end})
     spawn = 0
