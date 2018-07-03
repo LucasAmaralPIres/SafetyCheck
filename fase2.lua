@@ -29,14 +29,14 @@ end
 
 function fase2.load()
   posicaox = 250
-  obj = {{tm=3,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 5 posicaox = /// end}, 
-               {x=2825*cons_w ,y=250*cons_h,w=195*cons_w,h=450*cons_h, acao = function() tela = 6 posicaox = ///  end},
-               {x=3350*cons_w,y=250*cons_h,w=170*cons_w,h=450*cons_h, acao = function() tela = 2 posicaox = ///  end}},
-         {tm=3,{x= /// *cons_w ,y=250*cons_h,w= /// *cons_w,h=450*cons_h, acao = function() tela = 7 posicaox = /// end}, 
+  obj = {{tm=3,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 5 posicaox = 23 end}, 
+               {x=2825*cons_w ,y=250*cons_h,w=195*cons_w,h=450*cons_h, acao = function() tela = 6 posicaox = 23  end},
+               {x=3350*cons_w,y=250*cons_h,w=170*cons_w,h=450*cons_h, acao = function() tela = 2 posicaox = 23  end}},
+        --[[ {tm=3,{x= /// *cons_w ,y=250*cons_h,w= /// *cons_w,h=450*cons_h, acao = function() tela = 7 posicaox = /// end}, 
                {x= ///*cons_w ,y=250*cons_h,w= ///  *cons_w,h=450*cons_h, acao = function() tela = 8 posicaox = ///  end},
                {x= ///*cons_w,y=250*cons_h,w= ///  *cons_w,h=450*cons_h, acao = function() tela = 3 posicaox = /// end}},
          {tm=2,{x= /// *cons_w ,y=250*cons_h,w= /// *cons_w,h=450*cons_h, acao = function() tela = 9 posicaox = /// end}, 
-               {x= ///*cons_w ,y=250*cons_h,w= ///  *cons_w,h=450*cons_h, acao = function() tela = /// posicaox = ///  end}}
+               {x= ///*cons_w ,y=250*cons_h,w= ///  *cons_w,h=450*cons_h, acao = function() tela = /// posicaox = ///  end}}--]]}
   sprite_back = {{love.graphics.newImage("Imagens/Fases/Fase2/Fase2-01.png"),lim_esq = -2686,lim_dir = 152},
                 {love.graphics.newImage("Imagens/Fases/Fase2/Fase2-02.png"),lim_esq = -2686,lim_dir = 161},
                 {love.graphics.newImage("Imagens/Fases/Fase2/Fase2-03.png"),lim_esq=159,lim_dir=159},
