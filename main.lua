@@ -48,13 +48,21 @@ function love.update(dt)
         hud.correr(2)
       end
       if love.keyboard.isDown("up") then player.pular(dt) end
-      if love.keyboard.isDown("right") then player.andar(dt,"right") if menus.st == 4 then menus[4][fase].andar(dt) end
-      elseif love.keyboard.isDown("left") then player.andar(dt,"left") if menus.st == 4 then menus[4][fase].andar(dt) end
+      if love.keyboard.isDown("right") then 
+        if menus.st == 1 then player.andar(dt,"right",{p = 1, le= 0,ld = 2}) 
+        else menus[4][fase].andar(dt) player.andar(dt,"right",menus[4][fase].getInf()) end
+      elseif love.keyboard.isDown("left") then 
+        if menus.st == 1 then player.andar(dt,"left",{p = 1, le= 0,ld = 2})
+        else menus[4][fase].andar(dt) player.andar(dt,"left",menus[4][fase].getInf()) end
       end
     else
       player.pular(dt)
-      if player.ger_dir() == 1 then player.andar(dt,"right") if menus.st == 4 then menus[4][fase].andar(dt) end
-      else player.andar(dt,"left") if menus.st == 4 then menus[4][fase].andar(dt) end
+      if player.ger_dir() == 1 then 
+        if menus.st == 1 then player.andar(dt,"right",{p = 1, le= 0,ld = 2}) 
+        else menus[4][fase].andar(dt) player.andar(dt, "right", menus[4][fase].getInf()) end
+      else 
+        if menus.st == 1 then player.andar(dt,"left",{p = 1, le= 0,ld = 2}) 
+        else menus[4][fase].andar(dt) player.andar(dt, "left", menus[4][fase].getInf()) end
       end
     end
   end
@@ -65,7 +73,7 @@ function love.update(dt)
     elseif love.keyboard.isDown("left") then menus[menus.st].andar("left") end
   end
   if menus.st == 4 then 
-    menus[4][fase].update() 
+    menus[4][fase].update(player.getRet()) 
     if love.keyboard.isDown("right") then hud.stamina("right")
     elseif love.keyboard.isDown("left") then hud.stamina("left")
     else hud.stamina()

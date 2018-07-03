@@ -15,6 +15,10 @@ function fase1.keyreleased(key)
   end
 end
 
+function fase1.getInf()
+  return {p = posicaox, le = sprite_back[tela].lim_dir,ld = sprite_back[tela].lim_esq}
+end
+
 function fase1.stop_musica()
 end
 
@@ -55,6 +59,7 @@ function fase1.load()
                  {love.graphics.newImage("Imagens/Fases/Fase1/Fase1-07.png"),lim_esq = -2800,lim_dir = 223},
                  {love.graphics.newImage("Imagens/Fases/Fase1/Fase1-08.png"),lim_esq = -2300,lim_dir = 223}}
   img_destroco = love.graphics.newImage("Imagens/Sprites/Destrocos.png")
+  print(img_destroco:getWidth())
 end
 
 function fase1.andar(dt)
@@ -88,7 +93,8 @@ function fase1.draw()
   if morte.getDeath() == 0 then
     love.graphics.draw(sprite_back[tela][1],posicaox*cons_w,92*cons_h,0,1,cons_h*1.78,0,0)
     for index,v in ipairs(destr) do 
-      love.graphics.draw(img_destroco, v.x + posicaox, v.y,0,(0.5*love.graphics.getWidth())/1366,(0.5*love.graphics.getHeight())/768,0,0,0,0)
+      love.graphics.rectangle("fill",v.x + posicaox,v.y,img_destroco:getWidth()*0.5*cons_w,img_destroco:getHeight()*0.5*cons_h)
+      love.graphics.draw(img_destroco, v.x + posicaox, v.y,0,0.5*cons_w,0.5*cons_h,0,0,0,0)
     end
     if tela == 8 then love.graphics.rectangle("fill",(obj[tela][1].x+posicaox)*cons_w,obj[tela][1].y*cons_h,obj[tela][1].w*cons_w,obj[tela][1].h*cons_h) end
   else
@@ -96,19 +102,22 @@ function fase1.draw()
   end
 end
 
-function fase1.update()
-  spawn = spawn + 1
+function fase1.update(per)
+  if morte.getDeath() == 0 then spawn = spawn + 1 end
   if (spawn == dific) then
     a = love.math.random(sprite_back[tela].lim_esq*cons_w,(sprite_back[tela].lim_dir-sprite_back[tela].lim_esq)*cons_w)
     --print(a)
-    table.insert(destr,{x = a, y = 0})
+    table.insert(destr,{x = a, y = 0, acao = function() morte.death("Esmagado") end})
     spawn = 0
-    if (dific > 10) then
+    if (dific > 50) then
       dific = dific - 5
     end
   end
   for index,v in ipairs(destr) do 
 	  v.y = v.y + 8
+  end
+  for index,v in ipairs(destr) do 
+	  if col.retangulo_retangulo({x = v.x + posicaox,y = v.y,w = img_destroco:getWidth()*0.5*cons_w,h = img_destroco:getHeight()*0.5*cons_h},per) then v.acao() table.remove(destr,index) end
   end
 end
 
