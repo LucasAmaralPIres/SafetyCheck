@@ -29,20 +29,19 @@ end
 
 function fase2.load()
   posicaox = 250
-  obj = {{tm=3,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 5 posicaox = 250 end}, 
-               {x=2825*cons_w ,y=250*cons_h,w=195*cons_w,h=450*cons_h, acao = function() tela = 6 posicaox = 480  end},
+  obj = {{tm=3,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 5 posicaox = 212 end}, 
+               {x=2825*cons_w ,y=250*cons_h,w=195*cons_w,h=450*cons_h, acao = function() tela = 6 posicaox = 200  end},
                {x=3350*cons_w,y=250*cons_h,w=170*cons_w,h=450*cons_h, acao = function() tela = 2 posicaox = 0  end}},
-        {tm=3,{x=1050*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 7 posicaox = 0 end}, 
-               {x=2500*cons_w ,y=250*cons_h,w=180*cons_w,h=450*cons_h, acao = function() tela = 8 posicaox = 480  end},
-               {x=3350*cons_w,y=250*cons_h,w=170*cons_w,h=450*cons_h, acao = function() tela = 3 posicaox = 0  end}}, 
-        {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 9 posicaox = 250 end}}, 
-        {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = morte.death("Queimado") end}},
-        {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 1 posicaox = 250 end}},
-        {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 1 posicaox = 250 end}},
-        {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 2 posicaox = 250 end}},
-        {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 2 posicaox = 250 end}},
-        {tm=1,{x=1500*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 4 posicaox = 250 end}}}
-
+        {tm=3,{x=1050*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 7 posicaox = 211 end}, 
+               {x=2500*cons_w ,y=250*cons_h,w=180*cons_w,h=450*cons_h, acao = function() tela = 8 posicaox = 200  end},
+               {x=3320*cons_w,y=250*cons_h,w=140*cons_w,h=450*cons_h, acao = function() tela = 3 posicaox = 222  end}}, 
+        {tm=1,{x=182*cons_w ,y=250*cons_h,w=190*cons_w,h=450*cons_h, acao = function() tela = 9 posicaox = 250 end}}, 
+        {tm=1,{x=2000*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = morte.death("Queimado") end}},
+        {tm=1,{x=120*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 1 posicaox = -1642 end}},
+        {tm=1,{x=200*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 1 posicaox = -3460 end}},
+        {tm=1,{x=200*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 2 posicaox = -986 end}},
+        {tm=1,{x=200*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 2 posicaox = -3052 end}},
+        {tm=1,{x=1525*cons_w ,y=250*cons_h,w=185*cons_w,h=450*cons_h, acao = function() tela = 4 posicaox = 222 end}}}
   sprite_back = {{love.graphics.newImage("Imagens/Fases/Fase2/Fase2-01.png"),lim_esq = -2686,lim_dir = 152},
                 {love.graphics.newImage("Imagens/Fases/Fase2/Fase2-02.png"),lim_esq = -2686,lim_dir = 161},
                 {love.graphics.newImage("Imagens/Fases/Fase2/Fase2-03.png"),lim_esq=159,lim_dir=159},
