@@ -4,7 +4,8 @@ local obj
 function tela_inicial.load()
   bac_tel_inic = love.graphics.newImage("Imagens/Menu/tela_inicial.png")
   music_menu_inicial = love.audio.newSource("music/menu.mp3", "stream")
-  obj = {tm = 2,{x = cons_w * 143,y = cons_h * 345,w = cons_w * 178,h = cons_h * 370,acao = function() love.event.quit()      end},                {x = cons_w * 502,y = cons_h * 433,w = cons_w * 250,h = cons_h * 282,acao = function() switch_menu(2,getSt()) end}}
+  obj = {tm = 3,{x = cons_w * 143 ,y = cons_h * 345,w = cons_w * 178,h = cons_h * 370,acao = function() love.event.quit()      end},                {x = cons_w * 502 ,y = cons_h * 433,w = cons_w * 250,h = cons_h * 282,acao = function() o_menu = getSt() switch_menu(2,getSt()) end},
+                {x = cons_w * 1000,y = cons_h * 433,w = cons_w * 250,h = cons_h * 282,acao = function() switch_menu(4,getSt()) setX(cons_w* 950) end}}
 	       
 end
 

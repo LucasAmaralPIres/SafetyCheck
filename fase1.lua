@@ -36,20 +36,21 @@ end
 
 function fase1.load()
   posicaox = -103
-  obj = {{tm=1, {x=76  ,y=250,w=170,h=450, acao = function() tela = 2 posicaox = 227   end}},
-         {tm=2, {x=2900,y=250,w=170,h=450, acao = function() tela = 3 posicaox = -3900 end},
-                {x=153 ,y=250,w=170,h=450, acao = function() tela = 1 posicaox = 227   end}},
-         {tm=3, {x=950 ,y=250,w=175,h=450, acao = function() tela = 4 posicaox = 0     end},
-                {x=770 ,y=250,w=165,h=450, acao = function() tela = 5 posicaox = -670  end},
-                {x=4870,y=250,w=170,h=450, acao = function() tela = 2 posicaox = -2000 end}},
-         {tm=1, {x=763 ,y=250,w=170,h=450, acao = function() tela = 3 posicaox = 0     end}},
-         {tm=2, {x=1264,y=250,w=170,h=450, acao = function() tela = 6 posicaox = 223   end},
-                {x=940 ,y=250,w=170,h=450, acao = function() tela = 3 posicaox = -500  end}},
-         {tm=2, {x=1053,y=250,w=170,h=450, acao = function() tela = 7 posicaox = 223   end},
-                {x=73  ,y=250,w=170,h=450, acao = function() tela = 5 posicaox = -670  end}},
-         {tm=2, {x=3220,y=250,w=170,h=450, acao = function() tela = 8 posicaox = -2300 end},
-                {x=107 ,y=250,w=170,h=450, acao = function() tela = 6 posicaox = -80   end}},
-         {tm=1, {x=1264,y=250,w=170,h=450, acao = function() morte.death("Queimado") end}}}
+  obj = {{tm=1, {x=76  ,y=250,w=170,h=450, acao = function() tela = 2 posicaox = 227   setX(380*cons_w) end}},
+         {tm=3, {x=2900,y=250,w=170,h=450, acao = function() tela = 3 posicaox = -3900 setX(1000*cons_w) end},
+                {x=153 ,y=250,w=170,h=450, acao = function() tela = 1 posicaox = 227   setX(370*cons_w) end},
+                {x=1400,y=250,w=170,h=450, acao = function() morte.death("Espatifado") end}},
+         {tm=3, {x=950 ,y=250,w=175,h=450, acao = function() tela = 4 posicaox = 0     setX(870*cons_w)end},
+                {x=770 ,y=250,w=165,h=450, acao = function() tela = 5 posicaox = -670  setX(420*cons_w)end},
+                {x=4870,y=250,w=170,h=450, acao = function() tela = 2 posicaox = -2000 setX(1000*cons_w)end}},
+         {tm=1, {x=763 ,y=250,w=170,h=450, acao = function() tela = 3 posicaox = 0     setX(1030*cons_w)end}},
+         {tm=2, {x=1264,y=250,w=170,h=450, acao = function() tela = 6 posicaox = 223   setX(370*cons_w)end},
+                {x=940 ,y=250,w=170,h=450, acao = function() tela = 3 posicaox = -500  setX(370*cons_w)end}},
+         {tm=2, {x=1053,y=250,w=170,h=450, acao = function() tela = 7 posicaox = 223   setX(420*cons_w)end},
+                {x=73  ,y=250,w=170,h=450, acao = function() tela = 5 posicaox = -670  setX(680*cons_w)end}},
+         {tm=2, {x=3220,y=250,w=170,h=450, acao = function() tela = 8 posicaox = -2300 setX(1020*cons_w)end},
+                {x=107 ,y=250,w=170,h=450, acao = function() tela = 6 posicaox = -80   setX(1000*cons_w)end}},
+         {tm=1, {x=10  ,y=250,w=170,h=450, acao = function() setFase(2) end}}}
   sprite_back = {{love.graphics.newImage("Imagens/Fases/Fase1/Fase1-01.png"),lim_esq = -103 ,lim_dir = 227},
                  {love.graphics.newImage("Imagens/Fases/Fase1/Fase1-02.png"),lim_esq = -3263,lim_dir = 190},
                  {love.graphics.newImage("Imagens/Fases/Fase1/Fase1-03.png"),lim_esq = -3900,lim_dir = 223},
@@ -64,9 +65,9 @@ end
 
 function fase1.andar(dt)
   if morte.getDeath() == 0 then
-    if love.keyboard.isDown("left") and posicaox < (sprite_back[tela].lim_dir*cons_w) then posicaox = posicaox + (700*dt) 
-    elseif love.keyboard.isDown("right") and posicaox > (sprite_back[tela].lim_esq*cons_w) then posicaox = posicaox - (700*dt) 
-    end
+   if love.keyboard.isDown("left") and posicaox < (sprite_back[tela].lim_dir*cons_w) then posicaox = posicaox + (300*dt*correr) 
+   elseif love.keyboard.isDown("right") and posicaox > (sprite_back[tela].lim_esq*cons_w) then posicaox = posicaox - (300*dt*correr) 
+   end
   end
 end
 
@@ -93,10 +94,9 @@ function fase1.draw()
   if morte.getDeath() == 0 then
     love.graphics.draw(sprite_back[tela][1],posicaox*cons_w,92*cons_h,0,1,cons_h*1.78,0,0)
     for index,v in ipairs(destr) do 
-      love.graphics.rectangle("fill",v.x + posicaox,v.y,img_destroco:getWidth()*0.5*cons_w,img_destroco:getHeight()*0.5*cons_h)
       love.graphics.draw(img_destroco, v.x + posicaox, v.y,0,0.5*cons_w,0.5*cons_h,0,0,0,0)
     end
-    if tela == 8 then love.graphics.rectangle("fill",(obj[tela][1].x+posicaox)*cons_w,obj[tela][1].y*cons_h,obj[tela][1].w*cons_w,obj[tela][1].h*cons_h) end
+    if tela == 2 then love.graphics.rectangle("fill",(obj[tela][3].x+posicaox)*cons_w,obj[tela][3].y*cons_h,obj[tela][3].w*cons_w,obj[tela][3].h*cons_h) end
   else
     morte.draw()
   end

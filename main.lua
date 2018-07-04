@@ -12,9 +12,18 @@ col = require "colision"
 local player = require "player"
 local hud = require "hud"
 local fase = 1
+o_menu = 1
+
+function setFase(nfase)
+  fase = nfase
+end
 
 function getSt()
   return menus.st
+end
+
+function setX(nX)
+  player.setX(nX)
 end
 
 function love.load()
@@ -43,7 +52,7 @@ function love.update(dt)
   if menus.st == 1 or menus.st == 4 then 
     if player.getvelY() == 0 then
       if love.keyboard.isDown("lshift") then 
-        player.setCorrer(2) 
+        player.setCorrer(2)
         menus[4][fase].setCor(2)
         hud.correr(2)
       end
@@ -90,13 +99,14 @@ function love.keypressed(key)
     hud.interacao(key)
   elseif menus.st == 3 then
     menus[3].move(key)
+    o_menu = menus.st
     switch_menu(menus[3].interacao(key),menus.st)
   elseif menus.st == 1 then
     menus[menus.st].coli(key,player.getRet())
+  elseif menus.st == 2 then
+    menus[menus.st].keypressed(key)
   end
   if key == "up" and player.getvelY() == 0 and (menus.st == 1 or menus.st == 4) then player.keypressed("up") end
-  if key == "p" then menus.st = 4 fase = 1 end -- SOMENTE PARA O TESTE DA FASE
-  if key == "q" then menus.st = 4 fase = 2 end -- SOMENTE PARA O TESTE DA FASE
 end
 
 function switch_menu(novo_menu,velho_menu)
@@ -121,7 +131,6 @@ end
 --[[
 valor original - 1366
 x - love.graphics.getWidth()
-
 
 1366*x = love.graphics.getWidth() * valor original
 

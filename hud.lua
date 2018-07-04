@@ -22,7 +22,7 @@ function hud.draw()
   love.graphics.setColor(154, 205, 50, 255)
   love.graphics.rectangle("fill",(love.graphics.getWidth()*78)/2350,(love.graphics.getHeight()*60)/1440,(love.graphics.getWidth()*stamina)/2350,(love.graphics.getHeight()*69)/1440,love.graphics.setLineWidth(5))
   if morte.getMorte() < 10 then
-    love.graphics.print(morte.getMorte(), cons_w * 1290, cons_h * 20, 0, 10, 10)
+    love.graphics.print(morte.getMorte(), cons_w * 1290, cons_h * 20, 0, 8, 8)
   else 
     love.graphics.print(morte.getMorte(), cons_w * 1290, cons_h * 45, 0, 5, 5)
   end

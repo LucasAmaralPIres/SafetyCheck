@@ -16,7 +16,9 @@ end
 
 function tela_config.keypressed(key)
   if key == 'escape' then
-    switch_menu(1,getSt())
+    if o_menu == 1 then switch_menu(1,getSt())
+    else switch_menu(4,getSt())
+    end
   end
 end
 
